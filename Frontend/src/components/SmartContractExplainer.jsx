@@ -2,20 +2,20 @@ import React, { useState } from "react";
 import TypingEffect from "./TypingEffect";
 
 const SkeletonLoader = () => (
-    <div className="mt-8 p-6 bg-cyber-surface rounded-lg space-y-5 animate-pulse">
+  <div className="mt-8 p-6 bg-cyber-surface rounded-lg space-y-5 animate-pulse">
     <div className="space-y-3">
-        <div className="h-5 bg-cyber-blue/50 rounded w-1/3"></div>
-        <div className="h-4 bg-cyber-blue/50 rounded w-full"></div>
+      <div className="h-5 bg-cyber-blue/50 rounded w-1/3"></div>
+      <div className="h-4 bg-cyber-blue/50 rounded w-full"></div>
     </div>
     <div className="border-t border-cyber-blue/20 my-4"></div>
     <div className="space-y-3">
-        <div className="h-5 bg-cyber-blue/50 rounded w-1/4"></div>
-        <div className="h-4 bg-cyber-blue/50 rounded w-full"></div>
+      <div className="h-5 bg-cyber-blue/50 rounded w-1/4"></div>
+      <div className="h-4 bg-cyber-blue/50 rounded w-full"></div>
     </div>
     <div className="border-t border-cyber-blue/20 my-4"></div>
     <div className="p-4 bg-cyber-yellow/20 border border-cyber-yellow/50 rounded-lg">
-       <div className="h-5 bg-cyber-yellow/50 rounded w-1/3 mb-3"></div>
-       <div className="h-4 bg-cyber-yellow/50 rounded w-full"></div>
+      <div className="h-5 bg-cyber-yellow/50 rounded w-1/3 mb-3"></div>
+      <div className="h-4 bg-cyber-yellow/50 rounded w-full"></div>
     </div>
   </div>
 );
@@ -35,14 +35,14 @@ function SmartContractExplainer() {
     setSummary(null);
     setError("");
     try {
-      const response = await fetch('/api/explainContract', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contractAddress: contractAddress })
+      const response = await fetch("/api/explainContract", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contractAddress: contractAddress }),
       });
       if (!response.ok) {
         const errData = await response.json();
-        throw new Error(errData.rugPullRisks || 'An unknown error occurred.');
+        throw new Error(errData.rugPullRisks || "An unknown error occurred.");
       }
       const data = await response.json();
       setSummary(data);
@@ -60,9 +60,11 @@ function SmartContractExplainer() {
       <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-cyber-green rounded-tr-lg transition-opacity duration-300 opacity-50 group-hover:opacity-100 group-hover:animate-pulse-glow"></div>
       <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-cyber-green rounded-bl-lg transition-opacity duration-300 opacity-50 group-hover:opacity-100 group-hover:animate-pulse-glow"></div>
       <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-cyber-green rounded-br-lg transition-opacity duration-300 opacity-50 group-hover:opacity-100 group-hover:animate-pulse-glow"></div>
-      
+
       <div className="flex items-center mb-6">
-        <h2 className="text-2xl font-bold text-cyber-green">Smart Contract Analyzer</h2>
+        <h2 className="text-2xl font-bold text-cyber-green">
+          Smart Contract Analyzer
+        </h2>
       </div>
 
       <input
@@ -79,16 +81,36 @@ function SmartContractExplainer() {
         className="mt-6 w-full flex items-center justify-center bg-cyber-green/80 hover:bg-cyber-green text-cyber-bg font-bold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105"
       >
         {isLoading ? (
-          <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-cyber-bg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          <svg
+            className="animate-spin -ml-1 mr-3 h-5 w-5 text-cyber-bg"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
           </svg>
         ) : (
           "DECODE"
         )}
       </button>
 
-      {error && <p className="mt-4 text-cyber-red text-center animate-fade-in-up">{error}</p>}
+      {error && (
+        <p className="mt-4 text-cyber-red text-center animate-fade-in-up">
+          {error}
+        </p>
+      )}
       {isLoading && <SkeletonLoader />}
       {summary && !isLoading && (
         <div className="mt-8 p-6 bg-cyber-surface rounded-lg space-y-5 animate-fade-in-up">
